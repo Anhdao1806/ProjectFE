@@ -1,0 +1,91 @@
+body{
+    padding:0;
+    margin:0;
+    line-height: 30px;
+}
+.vid-container{
+    position:relative;
+    height: 100vh;
+    overflow:hidden;
+}
+.bgvid{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100vw;
+}
+.inner-container{
+    width:400px;
+    height:400px;
+    position:absolute;
+    top:calc(50vh - 200px);
+    left:calc(50vw - 200px);
+    overflow:hidden;
+}
+.bgvid.inner{
+    top:calc(-50vh + 200px);
+    left:calc(-50vw + 200px);
+    filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
+    -webkit-filter:blur(10px);
+    -ms-filter: blur(10px);
+    -o-filter: blur(10px);
+    filter:blur(10px);
+}
+.box{
+    position:absolute;
+    height:150%;
+    width:100%;
+    font-family:Helvetica;
+    color:#fff;
+    background:rgba(0,0,0,0.13);
+    padding:20px 0px;
+}
+.box h1{
+    text-align:center;
+    margin: 0;
+    font-size:20px;
+}
+.box input{
+    display:block;
+    width:300px;
+    margin:0 auto;
+    padding:10px;
+    background:rgba(0,0,0,0.2);
+    color:#fff;
+    border:0;
+    border-radius: 10px;
+}
+.box input:focus,.box input:active,.box button:focus,.box button:active{
+    outline:none;
+}
+.box button{
+    background:#2ecc71;
+    border:0;
+    color:#fff;
+    padding:10px;
+    font-size:20px;
+    width:330px;
+    margin:10px auto;
+    display:block;
+    cursor:pointer;
+    border-radius: 10px;
+    
+}
+  .box button:active{
+    background:#27ae60;
+}
+.box p{
+    font-size:14px;
+    text-align:center;
+    margin: 0;
+}
+.box p span{
+    cursor:pointer;
+}
+.box label{
+    margin: 0 0 0 40px;
+}
+a{
+    text-decoration: none;
+    color:#1fd70e;
+}

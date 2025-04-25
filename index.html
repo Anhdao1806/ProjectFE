@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Kaushan+Script&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">GYM MANAGEMENT</div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Trang chủ</a></li>
+                <li><a href="./pages/booking/schedule.html">Lịch tập</a></li>
+                <li id="manage-link" style="display: none;"><a href="../admin/dashboard.html">Quản lý</a></li>
+                <span id="greeting" style="margin-left:"></span>
+                <li><a href=".//pages/auth/login.html" id="auth-link">Đăng nhập</a></li>
+            </ul>
+            
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Gym</h1>
+            <p>Transform Your Body, Transform Your Life</p>
+            <button>Bắt đầu ngay</button>
+        </div>
+    </section>
+    <!-- Card -->
+    <section class="classes">
+        <h2>Các lớp học phổ biến</h2>
+        <div class="class-container">
+            <div class="class-card">
+                <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Gym">
+                <h3>GYM</h3>
+                <p>Tập luyện với các thiết bị hiện đại, nâng cao sức khỏe và thể hình.</p>
+                <button>Đặt lịch</button>
+            </div>
+            <div class="class-card">
+                <img src="https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Yoga">
+                <h3>YOGA</h3>
+                <p>Thư giãn và cân bằng tâm trí với các bài tập yoga.</p>
+                <button>Đặt lịch</button>
+            </div>
+            <div class="class-card">
+                <img src="https://images.pexels.com/photos/4807082/pexels-photo-4807082.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Zumba">
+                <h3>ZUMBA</h3>
+                <p>Đốt cháy calories với những điệu nhảy sôi động.</p>
+                <button>Đặt lịch</button>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Về chúng tôi</h4>
+                <p>GYM MANAGEMENT - Nơi bạn bắt đầu hành</p>
+                <p>trình fitness của mình với các trang </p>
+                <p>thiết bị hiện đại và đội ngũ huấn luyện chuyên nghiệp.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Liên hệ</h4>
+                <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37554a5b4154564177544a5e1d505c5e">[email protected]</a></p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+            </div>
+            <div class="footer-column">
+                <h4>Theo dõi chúng tôi</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 GYM MANAGEMENT. All rights reserved.</p>
+    </footer>
+    <script>
+        // Kiểm tra trạng thái đăng nhập khi trang tải
+        document.addEventListener('DOMContentLoaded', () => {
+            const authLink = document.getElementById('auth-link');
+            const manageLink = document.getElementById('manage-link');
+            const greeting = document.getElementById('greeting');
+            const loggedInUser = localStorage.getItem('loggedInUser');
+
+            if (loggedInUser) {
+                const user = JSON.parse(loggedInUser);
+                const username = user.email.split('@')[0]; // Lấy phần trước @ làm tên đăng nhập
+
+                // Hiển thị "Xin chào, [tên đăng nhập]" cho cả admin và user
+                greeting.textContent = `Xin chào, ${username}`;
+
+                // Đổi liên kết thành "Đăng xuất" cho cả admin và user
+                authLink.textContent = 'Đăng xuất';
+                authLink.href = '#';
+                authLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    logout(); // Gọi hàm logout từ main.js
+                });
+
+                // Nếu là admin, hiển thị mục "Quản lý"
+                if (user.role === 'admin') {
+                    manageLink.style.display = 'inline-block';
+                } else {
+                    manageLink.style.display = 'none'; // Ẩn mục "Quản lý" cho user
+                }
+            } else {
+                // Nếu chưa đăng nhập, giữ nguyên liên kết "Đăng nhập"
+                authLink.textContent = 'Đăng nhập';
+                authLink.href = './/pages/auth/login.html';
+                greeting.textContent = ''; // Không hiển thị "Xin chào"
+                manageLink.style.display = 'none'; // Ẩn mục "Quản lý"
+            }
+        });
+    </script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
