@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý lịch tập</title>
+    <link rel="stylesheet" href="../../assets/css/register.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">GYM MANAGEMENT</div>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Trang chủ</a></li>
+                <li><a href="../booking/schedule.html" class="active">Lịch tập</a></li>
+                <li><a href="#" id="add-schedule-link">Đặt lịch</a></li>
+            </ul>
+            <span id="greeting" style="margin-left: 20px;"></span>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="header-section">
+                <h2>Quản Lý lịch tập</h2>
+                <button class="add-schedule-btn" id="add-schedule-btn">Đặt lịch mới</button>
+            </div>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Lớp học</th>
+                        <th>Ngày tập</th>
+                        <th>Khung giờ</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Thao tác</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-list">
+                    <!-- Dữ liệu sẽ được thêm động -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Thêm/Sửa lịch -->
+    <div id="schedule-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"></span>
+            <h2 id="modal-title">Đặt lịch mới</h2>
+            <div class="form-group">
+                <label for="full-name">Họ tên</label>
+                <input type="text" id="full-name" required>
+                <div id="full-name-error" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="class-type">Lớp học</label>
+                <select id="class-type" required>
+                    <option value="" disabled selected>Chọn lớp học</option>
+                    <option value="Gym">Gym</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="Zumba">Zumba</option>
+                </select>
+                <div id="class-type-error" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="schedule-date">Ngày tập</label>
+                <input type="date" id="schedule-date" required>
+                <div id="schedule-date-error" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="time-slot">Khung giờ</label>
+                <select id="time-slot" required>
+                    <option value="" disabled selected>Chọn khung giờ</option>
+                    <option value="07:00 - 09:00">07:00 - 09:00</option>
+                    <option value="09:00 - 11:00">09:00 - 11:00</option>
+                    <option value="16:00 - 18:00">16:00 - 18:00</option>
+                    <option value="18:00 - 20:00">18:00 - 20:00</option>
+                </select>
+                <div id="time-slot-error" class="error"></div>
+            </div>
+            <div class="modal-buttons">
+                <button id="cancel-btn">Hủy</button>
+                <button id="save-btn">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xác nhận xóa -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Xác nhận xóa</h2>
+            <p>Bạn có chắc muốn xóa lịch tập này?</p>
+            <div class="modal-buttons">
+                <button id="cancel-delete-btn">Hủy</button>
+                <button id="confirm-delete-btn">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Về chúng tôi</h4>
+                <p>GYM MANAGEMENT - Nơi bạn bắt đầu hành</p>
+                <p>trình fitness của mình với các trang </p>
+                <p>thiết bị hiện đại và đội ngũ huấn luyện chuyên nghiệp.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Liên hệ</h4>
+                <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4c7cbcad0c5c7d0e4c3ddc98ac7cbc9">[email protected]</a></p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+            </div>
+            <div class="footer-column">
+                <h4>Theo dõi chúng tôi</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 GYM MANAGEMENT. All rights reserved.</p>
+    </footer>
+    <script src="../../assets/js/booking.js"></script>
+</body>
+</html>

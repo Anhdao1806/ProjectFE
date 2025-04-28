@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+    <div class="vid-container">
+        <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
+            <source src="https://videos.pexels.com/video-files/3327726/3327726-sd_640_360_24fps.mp4" type="video/webm">
+        </video>
+        <div class="inner-container">
+          <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop>
+            <source src="https://videos.pexels.com/video-files/3327726/3327726-sd_640_360_24fps.mp4" type="video/webm">
+          </video>
+          <div class="box">
+            <h1>Đăng nhập</h1>
+            <label>Email</label>
+            <input type="text" id="email">
+            <span id="email-error" class="error"></span>
+            <label>Mật khẩu</label>
+            <input type="password" id="password">
+            <span id="password-error" class="error"></span>
+            <button onclick="checkLogin()">Đăng nhập</button>
+            <p>Chưa có tài khoản? <span> <a href="./register.html">Đăng kí ngay </a></span></p>
+          </div>
+        </div>
+      </div>
+      <script src="../../assets/js/main.js"></script>
+</body>
+</html>
