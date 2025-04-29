@@ -37,7 +37,7 @@ function renderSchedules() {
                 <button onclick="editSchedule(${index})">Sửa</button>
                 <button onclick="deleteSchedule(${index})">Xóa</button>
             </td>
-            <td>${schedule.status || "Chờ duyệt"}</td>
+            <td>${schedule.status || "Chờ duyệt..."}</td>
         `;
         scheduleList.appendChild(row);
     });

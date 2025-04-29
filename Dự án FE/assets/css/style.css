@@ -102,13 +102,13 @@ body {
 h1{
     font-family: "Dancing Script", cursive;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: weight;
     font-style: normal;
 }
 h3{
     font-family: "Caveat", cursive;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: weight;
     font-style: normal;
 }
 h2{
