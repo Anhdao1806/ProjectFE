@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý lịch</title>
+    <link rel="stylesheet" href="../../assets/css/calendar.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="../../pages/admin/calendar.html" class="active">Quản lý lịch</a></li>
+                <li><a href="../../pages/admin/dashboard.html">Quản lý Dịch vụ</a></li>
+                <li><a href="../../index.html">Trang chủ</a></li>
+                <li><a href="#" id="logout-link" onclick="logout()">Đăng xuất</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Bộ lọc -->
+        <div class="schedule-filter-section">
+            <span>Bộ lọc</span>
+            <select id="filter-class" class="schedule-filter-input">
+                <option value="">Tất cả</option>
+                <!-- Danh sách lớp học sẽ được thêm động -->
+            </select>
+            <input type="text" id="filter-email" class="schedule-filter-input" placeholder="Tìm theo email">
+            <input type="date" id="filter-date" class="schedule-filter-input" placeholder="Ngày">
+            <button id="apply-filter" class="schedule-filter-btn">Lọc</button>
+        </div>
+        <!-- Bảng danh sách lịch -->
+        <div class="schedule-table-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Lớp học</th>
+                        <th>Ngày tập</th>
+                        <th>Khung giờ</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-list">
+                    <!-- Dữ liệu sẽ được thêm động -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal Thêm/Sửa lịch -->
+        <div id="schedule-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h2 id="modal-title">Sửa lịch tập</h2>
+                <div class="form-group">
+                    <label for="full-name">Họ tên:</label>
+                    <input type="text" id="full-name" placeholder="Nhập họ tên">
+                    <span id="full-name-error" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="class-type">Lớp học:</label>
+                    <select id="class-type">
+                        <option value="">Chọn lớp học</option>
+                        <!-- Danh sách lớp học sẽ được thêm động -->
+                    </select>
+                    <span id="class-type-error" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="schedule-date">Ngày tập:</label>
+                    <input type="date" id="schedule-date">
+                    <span id="schedule-date-error" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="time-slot">Khung giờ:</label>
+                    <select id="time-slot">
+                        <option value="">Chọn khung giờ</option>
+                        <option value="07:00 - 09:00">07:00 - 09:00</option>
+                        <option value="09:00 - 11:00">09:00 - 11:00</option>
+                        <option value="14:00 - 16:00">14:00 - 16:00</option>
+                        <option value="16:00 - 18:00">16:00 - 18:00</option>
+                    </select>
+                    <span id="time-slot-error" class="error"></span>
+                </div>
+                <div class="modal-buttons">
+                    <button id="cancel-btn">Hủy</button>
+                    <button id="save-btn">Lưu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Xóa lịch -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <h2>Xác nhận xóa</h2>
+                <p>Bạn có chắc chắn muốn xóa lịch tập này?</p>
+                <div class="modal-buttons">
+                    <button id="cancel-delete-btn">Hủy</button>
+                    <button id="confirm-delete-btn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/admin/calendar.js"></script>
+</body>
+</html>

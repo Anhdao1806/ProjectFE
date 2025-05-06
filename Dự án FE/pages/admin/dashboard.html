@@ -12,14 +12,13 @@
         <h2>Admin Dashboard</h2>
         <nav>
             <ul>
-                <li><a href="../../pages/admin/dashboard.html">Quản lý lịch</a></li>
+                <li><a href="../../pages/admin/calendar.html">Quản lý lịch</a></li>
                 <li><a href="../../pages/admin/dashboard.html" class="active">Quản lý Dịch vụ</a></li>
                 <li><a href="../../index.html">Trang chủ</a></li>
                 <li><a href="#" id="logout-link" onclick="logout()">Đăng xuất</a></li>
             </ul>
         </nav>
     </aside>
-
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
@@ -37,43 +36,15 @@
                     </tr>
                 </thead>
                 <tbody id="service-list">
-                    <!-- Dữ liệu mẫu -->
-                    <tr>
-                        <td>Gym</td>
-                        <td>Tập luyện với các thiết bị hiện đại</td>
-                        <td><img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Gym"></td>
-                        <td>
-                            <button class="edit-btn" onclick="editService(0)">Sửa</button>
-                            <button class="delete-btn" onclick="deleteService(0)">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Yoga</td>
-                        <td>Thư giãn và cân bằng tâm trí</td>
-                        <td><img src="https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Yoga"></td>
-                        <td>
-                            <button class="edit-btn" onclick="editService(1)">Sửa</button>
-                            <button class="delete-btn" onclick="deleteService(1)">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Zumba</td>
-                        <td>Đốt cháy calories với nhịp điệu sôi động</td>
-                        <td><img src="https://images.pexels.com/photos/4807082/pexels-photo-4807082.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Zumba"></td>
-                        <td>
-                            <button class="edit-btn" onclick="editService(2)">Sửa</button>
-                            <button class="delete-btn" onclick="deleteService(2)">Xóa</button>
-                        </td>
-                    </tr>
+                    <!-- Dữ liệu sẽ được thêm động từ JavaScript -->
                 </tbody>
             </table>
         </div>
     </main>
-
     <!-- Modal Thêm/Sửa Dịch vụ -->
     <div id="service-modal" class="modal">
         <div class="modal-content">
-            <span class="close"></span>
+            <span class="close">×</span>
             <h2 id="modal-title">Thêm Dịch vụ mới</h2>
             <div class="form-group">
                 <label for="service-name">Tên Dịch vụ</label>
@@ -96,7 +67,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal Xác nhận Xóa -->
     <div id="delete-modal" class="modal">
         <div class="modal-content">
@@ -109,6 +79,6 @@
             </div>
         </div>
     </div>
-    <script src="../../assets/js/admin.js"></script>
+    <script src="../../assets/js/admin/dashboard.js"></script>
 </body>
 </html>

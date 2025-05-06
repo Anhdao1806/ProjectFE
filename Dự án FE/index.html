@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -20,7 +20,7 @@
                 <li id="training-schedule"><a href="./pages/booking/schedule.html">Lịch tập</a></li>
                 <li id="manage-link" style="display: none;"><a href="./pages/admin/dashboard.html">Quản lý</a></li>
                 <span id="greeting" style="margin-left:auto"></span>
-                <li><a href=".//pages/auth/login.html" id="auth-link">Đăng nhập</a></li>
+                <li><a href="./pages/auth/login.html" id="auth-link">Đăng nhập</a></li>
             </ul>
         </nav>
     </header>
@@ -29,31 +29,14 @@
         <div class="hero-content">
             <h1>Welcome to Our Gym</h1>
             <p>Transform Your Body, Transform Your Life</p>
-            <button>Bắt đầu ngay</button>
+            <button onclick="slideDown()">Bắt đầu ngay</button>
         </div>
     </section>
     <!-- Card -->
     <section class="classes">
         <h2>Các lớp học phổ biến</h2>
-        <div class="class-container">
-            <div class="class-card">
-                <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Gym">
-                <h3>GYM</h3>
-                <p>Tập luyện với các thiết bị hiện đại, nâng cao sức khỏe và thể hình.</p>
-                <button>Đặt lịch</button>
-            </div>
-            <div class="class-card">
-                <img src="https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Yoga">
-                <h3>YOGA</h3>
-                <p>Thư giãn và cân bằng tâm trí với các bài tập yoga.</p>
-                <button>Đặt lịch</button>
-            </div>
-            <div class="class-card">
-                <img src="https://images.pexels.com/photos/4807082/pexels-photo-4807082.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Zumba">
-                <h3>ZUMBA</h3>
-                <p>Đốt cháy calories với những điệu nhảy sôi động.</p>
-                <button>Đặt lịch</button>
-            </div>
+        <div class="class-container" id="class-container">
+            <!-- Dữ liệu sẽ được thêm động -->
         </div>
     </section>
     <!-- Footer -->
@@ -82,45 +65,6 @@
         </div>
         <p class="footer-copy">© 2024 GYM MANAGEMENT. All rights reserved.</p>
     </footer>
-    <script>
-        // Kiểm tra trạng thái đăng nhập khi trang tải
-        document.addEventListener('DOMContentLoaded', () => {
-            const authLink = document.getElementById('auth-link');
-            const manageLink = document.getElementById('manage-link');
-            const greeting = document.getElementById('greeting');
-            const loggedInUser = localStorage.getItem('loggedInUser');
-            const trainingSchedule = document.getElementById('training-schedule');
-            if (loggedInUser) {
-                const user = JSON.parse(loggedInUser);
-                const username = user.email.split('@')[0]; // Lấy phần trước @ làm tên đăng nhập
-
-                // Hiển thị "Xin chào, [tên đăng nhập]" cho cả admin và user
-                greeting.textContent = `Xin chào, ${username}`;
-
-                // Đổi liên kết thành "Đăng xuất" cho cả admin và user
-                authLink.textContent = 'Đăng xuất';
-                authLink.href = '#';
-                authLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    logout(); // Gọi hàm logout từ main.js
-                });
-
-                // Nếu là admin, hiển thị mục "Quản lý"
-                if (user.role === 'admin') {
-                    manageLink.style.display = 'inline-block';
-                    trainingSchedule.style.display = 'none'; // Ẩn mục "Lịch tập" cho admin
-                } else {
-                    manageLink.style.display = 'none'; // Ẩn mục "Quản lý" cho user
-                }
-            } else {
-                // Nếu chưa đăng nhập, giữ nguyên liên kết "Đăng nhập"
-                authLink.textContent = 'Đăng nhập';
-                authLink.href = './/pages/auth/login.html';
-                greeting.textContent = ''; // Không hiển thị "Xin chào"
-                manageLink.style.display = 'none'; // Ẩn mục "Quản lý"
-            }
-        });
-    </script>
     <script src="../assets/js/main.js"></script>
 </body>
 </html>

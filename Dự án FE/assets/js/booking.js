@@ -16,6 +16,26 @@ if (loggedInUser) {
     greeting.style.color = 'red';
 }
 
+// Hàm hiển thị danh sách lớp học trong select
+function renderClassTypes() {
+    const services = JSON.parse(localStorage.getItem('services')) || [];
+    const classTypeSelect = document.getElementById('class-type');
+    classTypeSelect.innerHTML = '<option value="">Chọn lớp học</option>'; // Reset danh sách
+    services.forEach(service => {
+        const option = document.createElement('option');
+        option.value = service.name;
+        option.textContent = service.name;
+        classTypeSelect.appendChild(option);
+    });
+
+    // Lấy class từ URL và chọn mặc định
+    const urlParams = new URLSearchParams(window.location.search);
+    const className = urlParams.get('class');
+    if (className) {
+        classTypeSelect.value = decodeURIComponent(className);
+    }
+}
+
 // Hiển thị danh sách lịch
 function renderSchedules() {
     const scheduleList = document.getElementById('schedule-list');
@@ -24,8 +44,8 @@ function renderSchedules() {
         scheduleList.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Vui lòng đăng nhập để xem lịch tập</td></tr>';
         return;
     }
-    const userSchedules = schedules.filter(schedule => schedule.email === loggedInUser.email);
-    userSchedules.forEach((schedule, index) => {
+    // Hiển thị tất cả lịch tập, không lọc theo email
+    schedules.forEach((schedule, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${schedule.classType}</td>
@@ -35,10 +55,7 @@ function renderSchedules() {
             <td>${schedule.email}</td>
             <td>
                 <button onclick="editSchedule(${index})">Sửa</button>
-                <button onclick="deleteSchedule(${index})">Xóa</button>
-            </td>
-            <td>${schedule.status || "Chờ duyệt..."}</td>
-        `;
+                <button onclick="deleteSchedule(${index})">Xóa</button>`;
         scheduleList.appendChild(row);
     });
 }
@@ -59,15 +76,21 @@ addScheduleBtn.onclick = addScheduleLink.onclick = () => {
     }
     document.getElementById('modal-title').textContent = 'Đặt lịch mới';
     document.getElementById('full-name').value = '';
+    document.getElementById('email').value = loggedInUser.email; // Đặt giá trị mặc định từ loggedInUser
     document.getElementById('class-type').value = '';
     document.getElementById('schedule-date').value = '';
     document.getElementById('time-slot').value = '';
     clearErrors();
+    renderClassTypes(); // Cập nhật danh sách lớp học
     editIndex = -1;
     modal.style.display = 'block';
 };
 
-closeModal.onclick = cancelBtn.onclick = () => {
+closeModal.onclick = () => {
+    modal.style.display = 'none';
+};
+
+cancelBtn.onclick = () => {
     modal.style.display = 'none';
 };
 
@@ -80,6 +103,7 @@ modal.addEventListener('click', (event) => {
 
 saveBtn.onclick = () => {
     const fullName = document.getElementById('full-name').value.trim();
+    const email = document.getElementById('email').value.trim(); // Lấy email từ input
     const classType = document.getElementById('class-type').value;
     const date = document.getElementById('schedule-date').value;
     const timeSlot = document.getElementById('time-slot').value;
@@ -91,6 +115,24 @@ saveBtn.onclick = () => {
     if (!fullName) {
         displayError('full-name-error', 'Vui lòng nhập họ tên');
         hasError = true;
+    } else {
+        // Regex: chỉ cho phép chữ cái (bao gồm tiếng Việt có dấu) và khoảng trắng
+        const nameRegex = /^[A-Za-zÀ-ỹ\s]+$/;
+        if (!nameRegex.test(fullName)) {
+            displayError('full-name-error', 'Họ tên chỉ được chứa chữ cái và khoảng trắng');
+            hasError = true;
+        }
+    }
+    if (!email) {
+        displayError('email-error', 'Vui lòng nhập email');
+        hasError = true;
+    } else {
+        // Kiểm tra định dạng email cơ bản
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            displayError('email-error', 'Email không hợp lệ');
+            hasError = true;
+        }
     }
     if (!classType) {
         displayError('class-type-error', 'Vui lòng chọn lớp học');
@@ -107,13 +149,13 @@ saveBtn.onclick = () => {
 
     // Kiểm tra trùng lặp
     const duplicate = schedules.some((schedule, idx) => 
-        schedule.email === loggedInUser.email && 
+        schedule.email === email && 
         schedule.date === date && 
         schedule.timeSlot === timeSlot && 
         idx !== editIndex
     );
     if (duplicate) {
-        displayError('time-slot-error', 'Lịch tập đã tồn tại cho khung giờ này');
+        displayError('time-slot-error', 'Lịch tập đã tồn tại cho khung giờ này với email này');
         hasError = true;
     }
 
@@ -123,7 +165,7 @@ saveBtn.onclick = () => {
             classType,
             date,
             timeSlot,
-            email: loggedInUser.email,
+            email, // Lưu email được nhập thay vì loggedInUser.email
             status: "Chờ duyệt" // Giữ trạng thái mặc định
         };
 
@@ -146,7 +188,11 @@ const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
 const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
 let deleteIndex = -1;
 
-closeDeleteModal.onclick = cancelDeleteBtn.onclick = () => {
+closeDeleteModal.onclick = () => {
+    deleteModal.style.display = 'none';
+};
+
+cancelDeleteBtn.onclick = () => {
     deleteModal.style.display = 'none';
 };
 
@@ -161,6 +207,8 @@ function editSchedule(index) {
     const schedule = schedules[index];
     document.getElementById('modal-title').textContent = 'Sửa lịch tập';
     document.getElementById('full-name').value = schedule.fullName;
+    document.getElementById('email').value = schedule.email; // Hiển thị email hiện tại để chỉnh sửa
+    renderClassTypes(); // Cập nhật danh sách lớp học
     document.getElementById('class-type').value = schedule.classType;
     document.getElementById('schedule-date').value = schedule.date;
     document.getElementById('time-slot').value = schedule.timeSlot;
@@ -189,7 +237,7 @@ function displayError(errorId, message) {
 
 // Hàm xóa lỗi
 function clearErrors() {
-    const errors = ['full-name-error', 'class-type-error', 'schedule-date-error', 'time-slot-error'];
+    const errors = ['full-name-error', 'email-error', 'class-type-error', 'schedule-date-error', 'time-slot-error'];
     errors.forEach(id => {
         const errorElement = document.getElementById(id);
         errorElement.innerHTML = '';
@@ -200,4 +248,5 @@ function clearErrors() {
 // Hiển thị danh sách lịch khi tải trang
 document.addEventListener('DOMContentLoaded', () => {
     renderSchedules();
+    renderClassTypes(); // Khởi tạo danh sách lớp học khi tải trang
 });

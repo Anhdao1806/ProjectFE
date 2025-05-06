@@ -36,7 +36,6 @@
                         <th>Họ tên</th>
                         <th>Email</th>
                         <th>Thao tác</th>
-                        <th>Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody id="schedule-list">
@@ -49,12 +48,17 @@
     <!-- Modal Thêm/Sửa lịch -->
     <div id="schedule-modal" class="modal">
         <div class="modal-content">
-            <span class="close"></span>
+            <span class="close">×</span>
             <h2 id="modal-title">Đặt lịch mới</h2>
             <div class="form-group">
                 <label for="full-name">Họ tên</label>
                 <input type="text" id="full-name" required>
                 <div id="full-name-error" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <div id="email-error" class="error"></div>
             </div>
             <div class="form-group">
                 <label for="class-type">Lớp học</label>
@@ -92,7 +96,7 @@
     <!-- Modal Xác nhận xóa -->
     <div id="delete-modal" class="modal">
         <div class="modal-content">
-            <span class="close"></span>
+            <span class="close">×</span>
             <h2>Xác nhận xóa</h2>
             <p>Bạn có chắc muốn xóa lịch tập này?</p>
             <div class="modal-buttons">
